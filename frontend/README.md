@@ -1,6 +1,8 @@
-# Getting Started with Create React App
+# SVG Chart
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Demo
+
+[https://svg-chart.quangtuan.me/](https://svg-chart.quangtuan.me/)
 
 ## Available Scripts
 
