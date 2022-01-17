@@ -1,0 +1,33 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ingress-svg-chart
+  annotations:
+    kubernetes.io/ingress.class: "nginx"
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
+    ingress.kubernetes.io/proxy-body-size: "1000m"
+    nginx.ingress.kubernetes.io/proxy-body-size: "0"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "600"
+    external-dns.alpha.kubernetes.io/hostname: "svg-chart.quangtuan.me"
+    external-dns.alpha.kubernetes.io/target: quangtuan.me
+    external-dns.alpha.kubernetes.io/ttl: "120"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  tls:
+    - hosts:
+        - svg-chart.quangtuan.me
+      secretName: certificate-prod-svg-chart-quangtuan-me-tls
+
+  rules:
+    - host: "svg-chart.quangtuan.me"
+      http:
+        paths:
+          - path: "/"
+            pathType: Prefix
+            backend:
+              service:
+                name: svg-chart-frontend-svc
+                port:
+                  number: 80
